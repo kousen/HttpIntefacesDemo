@@ -1,5 +1,6 @@
 package com.oreilly.httpinterfacesdemo;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.service.annotation.*;
@@ -17,7 +18,7 @@ public interface JsonPlaceholderService {
     Optional<BlogPost> getPost(@PathVariable int id);
 
     @PostExchange
-    BlogPost createPost(@RequestBody BlogPost post);
+    ResponseEntity<BlogPost> createPost(@RequestBody BlogPost post);
 
     @PutExchange("{id}")
     BlogPost updatePost(@PathVariable int id, @RequestBody BlogPost post);

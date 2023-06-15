@@ -3,8 +3,10 @@ package com.oreilly.httpinterfacesdemo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -38,8 +40,11 @@ class JsonPlaceholderServiceTest {
         var post = new BlogPost(null, 1,
                 "Test Post", "This is a test post.");
         var created = service.createPost(post);
+        assertThat(created.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         System.out.println(created);
-        assertNotNull(created.id());
+        BlogPost blogPost = created.getBody();
+        assertNotNull(blogPost);
+        assertNotNull(blogPost.id());
     }
 
     @Test
