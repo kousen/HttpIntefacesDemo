@@ -1,4 +1,4 @@
-package com.oreilly.httpinterfacesdemo;
+package com.kousenit.httpinterfacesdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +31,12 @@ class JsonPlaceholderServiceTest {
 
     @Test
     void getPost_doesNotExist() {
+        // WebClientResponseException exception =
         assertThrows(WebClientResponseException.class,
-                () -> service.getPost(101));
+                        () -> service.getPost(101));
+        // assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+        // exception.getHeaders().forEach((k, v) -> System.out.println(k + ": " + v));
+        // assertThat(exception.getStatusText()).contains("Conduct Unbecoming");
     }
 
     @Test

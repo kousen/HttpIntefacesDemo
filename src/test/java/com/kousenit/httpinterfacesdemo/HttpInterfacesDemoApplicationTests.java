@@ -1,4 +1,4 @@
-package com.oreilly.httpinterfacesdemo;
+package com.kousenit.httpinterfacesdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

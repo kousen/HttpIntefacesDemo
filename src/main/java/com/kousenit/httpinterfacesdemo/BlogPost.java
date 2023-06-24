@@ -1,4 +1,4 @@
-package com.oreilly.httpinterfacesdemo;
+package com.kousenit.httpinterfacesdemo;
 
 public record BlogPost(Integer id,
                        Integer userId,

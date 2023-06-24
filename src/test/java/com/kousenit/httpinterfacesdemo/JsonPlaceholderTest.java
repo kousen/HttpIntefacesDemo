@@ -1,4 +1,4 @@
-package com.oreilly.httpinterfacesdemo;
+package com.kousenit.httpinterfacesdemo;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -22,13 +22,21 @@ public class JsonPlaceholderTest {
     }
 
     @Test
-    void getPost() {
+    void getPost_exists() {
         client.get()
                 .uri("https://jsonplaceholder.typicode.com/posts/1")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(BlogPost.class)
                 .value(BlogPost::id, Matchers.equalTo(1));
+    }
+
+    @Test
+    void getPost_doesNotExist() {
+        client.get()
+                .uri("https://jsonplaceholder.typicode.com/posts/101")
+                .exchange()
+                .expectStatus().isNotFound();
     }
 
     @Test
@@ -41,7 +49,8 @@ public class JsonPlaceholderTest {
                 .exchange()
                 .expectStatus().isCreated()
                 .expectBody(BlogPost.class)
-                .value(BlogPost::id, Matchers.notNullValue());
+                .value(BlogPost::id, Matchers.notNullValue())
+                .consumeWith(System.out::println);
     }
 
     @Test
@@ -54,7 +63,8 @@ public class JsonPlaceholderTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(BlogPost.class)
-                .value(BlogPost::id, Matchers.equalTo(1));
+                .value(BlogPost::id, Matchers.equalTo(1))
+                .consumeWith(System.out::println);
     }
 
     @Test

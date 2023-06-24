@@ -1,4 +1,4 @@
-package com.oreilly.httpinterfacesdemo;
+package com.kousenit.httpinterfacesdemo;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

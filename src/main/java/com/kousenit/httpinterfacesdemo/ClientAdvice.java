@@ -1,4 +1,4 @@
-package com.oreilly.httpinterfacesdemo;
+package com.kousenit.httpinterfacesdemo;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
