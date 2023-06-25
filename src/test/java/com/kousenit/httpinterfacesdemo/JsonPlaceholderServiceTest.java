@@ -38,6 +38,7 @@ class JsonPlaceholderServiceTest {
         exception.getHeaders()
                 .forEach((k, v) -> System.out.println(k + ": " + v));
         assertThat(exception.getStatusText()).contains("Conduct Unbecoming");
+        System.out.println(exception.getStatusText());
     }
 
     @Test

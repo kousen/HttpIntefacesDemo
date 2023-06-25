@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.util.stream.IntStream;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class JsonPlaceholderTest {
     @Autowired
@@ -23,12 +25,14 @@ public class JsonPlaceholderTest {
 
     @Test
     void getPost_exists() {
-        client.get()
-                .uri("https://jsonplaceholder.typicode.com/posts/1")
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(BlogPost.class)
-                .value(BlogPost::id, Matchers.equalTo(1));
+        IntStream.rangeClosed(1, 100)
+                .parallel()
+                .forEach(id -> client.get()
+                        .uri("https://jsonplaceholder.typicode.com/posts/{id}", id)
+                        .exchange()
+                        .expectStatus().isOk()
+                        .expectBody(BlogPost.class)
+                        .value(BlogPost::id, Matchers.equalTo(id)));
     }
 
     @Test
