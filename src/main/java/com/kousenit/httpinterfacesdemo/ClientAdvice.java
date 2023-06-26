@@ -12,6 +12,6 @@ public class ClientAdvice {
     @ExceptionHandler(WebClientResponseException.class)
     public ProblemDetail handleClientException(WebClientResponseException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND,
-                ex.getResponseBodyAsString());
+                ex.getMessage());
     }
 }
