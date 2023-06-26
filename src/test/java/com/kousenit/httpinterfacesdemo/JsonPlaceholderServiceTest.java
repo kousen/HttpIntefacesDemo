@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,11 +25,14 @@ class JsonPlaceholderServiceTest {
 
     @Test
     void getPost_exists() {
-        var post = service.getPost(1);
-        assertTrue(post.isPresent());
-        System.out.println(post.get());
+        IntStream.rangeClosed(1, 100)
+                .parallel()
+                .forEach(i -> {
+                    var post = service.getPost(i);
+                    assertTrue(post.isPresent());
+                    assertEquals(i, post.get().id());
+                });
     }
-
 
     @Test
     void getPost_doesNotExist() {
